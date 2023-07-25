@@ -1,0 +1,15 @@
+/* https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics */
+
+html {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin-left: 10px;
+}
+
+p {
+  font-size: 18px;
+}

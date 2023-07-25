@@ -1,0 +1,45 @@
+// Examples
+
+/* Get an element and set its text
+const myHeading = document.querySelector("h1");
+myHeading.textContent = "Hello world!";
+*/
+
+/* Display a pop-up box
+alert(message)
+prompt(message)
+*/
+
+/* let iceCream = "chocolate";
+Define a variable */
+
+/* Events
+document.querySelector("html").addEventListener("click", function () {
+    alert("Ouch! Stop poking me!");
+  });
+
+document.querySelector("html").addEventListener("click", () => {
+  alert("Ouch! Stop poking me!");
+});
+*/
+
+// clickButton
+let clickButton = document.getElementById("clickButton")
+let clickText = document.getElementById("clickText")
+
+window.addEventListener('load', function () {
+    let clicks = this.localStorage.getItem('clicks')
+    if (!clicks) {
+        clicks = '0'
+    }
+    clickText.textContent = 'Clicks: ' + clicks.toString()
+  })
+
+clickButton.addEventListener("click", function () {
+    let clicks = localStorage.getItem('clicks')
+
+    clicks = (parseInt(clicks) + 1).toString()
+
+    localStorage.setItem('clicks', clicks)
+    clickText.textContent = 'Clicks: ' + clicks
+});
