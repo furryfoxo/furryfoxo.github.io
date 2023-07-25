@@ -27,16 +27,12 @@ document.querySelector("html").addEventListener("click", () => {
 let clickButton = document.getElementById("clickButton")
 let clickText = document.getElementById("clickText")
 
-window.addEventListener('load', function () {
-    let clicks = this.localStorage.getItem('clicks')
-    if (!clicks) {
-        clicks = '0'
-    }
-    clickText.textContent = 'Clicks: ' + clicks.toString()
-  })
 
 clickButton.addEventListener("click", function () {
     let clicks = localStorage.getItem('clicks')
+    if (!clicks) {
+      clicks = '0'
+    }
 
     clicks = (parseInt(clicks) + 1).toString()
 
