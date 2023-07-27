@@ -24,18 +24,17 @@ document.querySelector("html").addEventListener("click", () => {
 */
 
 // clickButton
-let clickButton = document.getElementById("clickButton")
-let clickText = document.getElementById("clickText")
-
+let clickButton = document.getElementById("clickButton");
+let clickText = document.getElementById("clickText");
 
 clickButton.addEventListener("click", function () {
-    let clicks = localStorage.getItem('clicks')
-    if (!clicks) {
-      clicks = '0'
+    let clicks = localStorage.getItem('clicks');
+    if (!clicks || isNaN(parseInt(clicks))) {
+        clicks = '0';
     }
 
-    clicks = (parseInt(clicks) + 1).toString()
+    clicks = (parseInt(clicks) + 1).toString();
+    localStorage.setItem('clicks', clicks);
 
-    localStorage.setItem('clicks', clicks)
-    clickText.textContent = 'Clicks: ' + clicks
+    clickText.textContent = 'Clicks: ' + clicks;
 });
