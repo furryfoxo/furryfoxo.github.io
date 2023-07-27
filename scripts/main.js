@@ -10,9 +10,6 @@ alert(message)
 prompt(message)
 */
 
-/* let iceCream = "chocolate";
-Define a variable */
-
 /* Events
 document.querySelector("html").addEventListener("click", function () {
     alert("Ouch! Stop poking me!");
