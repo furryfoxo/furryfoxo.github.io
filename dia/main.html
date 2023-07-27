@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="../../default.css" rel="stylesheet"/>
-		<link href="dia.css" rel="stylesheet"/>
 		<title>Activity List</title>
+		<link href="../global.css" rel="stylesheet"/>
 	</head>
 
 	<body>
-		<table id="activityTable">
+		<table class="activityTable" id="activityTable">
 			<thead>
 				<th>Time</th>
 				<th>Activity</th>
@@ -17,8 +16,8 @@
 		<label for="activityInput">Add: </label>
 		<input type="text", id="activityInput">
 	
-		<button id="activityReset">Reset</button>
+		<button id="activityReset" style="margin-top: 10px;">Clear</button>
 
-		<script src="dia.js"></script>
+		<script src="script.js"></script>
 	</body>
 </html>

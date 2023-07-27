@@ -1,7 +1,6 @@
 // Initialite Table
-
 const aInput = document.getElementById('activityInput');
-const aTable = document.getElementById('activityTable');
+const aTable = document.querySelector('.activityTable');
 
 aInput.addEventListener('keydown', function (event) {
 	if (!event.repeat && event.key == 'Enter') {
