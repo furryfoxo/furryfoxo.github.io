@@ -5,11 +5,11 @@ html {
 }
 
 a, p, input, label {
-	font-size: 18px;
+	font-size: 1rem;
 }
 
 button {
-	font-size: 16px;
+	font-size: 1rem;
 	padding: 4px;
 	display: block;
 }
@@ -18,12 +18,15 @@ input {
 	padding: 5px;
 }
 
+ul {
+	list-style-type: none;
+}
 
 /* Tables */
 
 .activityTable {
 	border-collapse: collapse;
-	margin-bottom: 15px;
+	margin-bottom: 0.8rem;
 }
 	
 .activityTable td, .activityTable th {
@@ -67,12 +70,7 @@ a:visited {
 /* Center an element */
 
 .centeredContainer {
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.centeredItem {
-    width: 10em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
