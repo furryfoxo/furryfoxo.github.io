@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dawn of the Final Day</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #txt {
+            font-size: 2em;
+            margin-top: 100px;
+        }
+
+        #godot {
+            font-size: 4em;
+            margin-top: 20px;
+        }
+
+        #msg {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="txt">Dawn of</div>
+    <div id="godot">Godot 4.2</div>
+    <div id="msg">-? Issues Remain-</div>
+
+    <script>
+        function get_issue_count() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', "https://api.github.com/repos/godotengine/godot/milestones/18", false);
+            xhr.send();
+
+            if (xhr.status >= 200 && xhr.status < 300) {
+                let jsonResponse = JSON.parse(xhr.responseText);
+                let issue_count = jsonResponse.open_issues
+                console.log(issue_count);
+                return issue_count
+            } else {
+                console.log('?')
+            }
+        }
+
+        function update_issue_count() {
+            let issue_count = get_issue_count();
+            document.getElementById("msg").textContent = `-${issue_count} Issues Remain-`;
+            return issue_count
+        }
+
+        var x = setInterval(function() {
+           let issue_count = update_issue_count();
+            if (issue_count === 0) {
+                clearInterval(x)
+            }
+        }, 20000);
+
+        update_issue_count()
+    </script>
+</body>
+</html>
