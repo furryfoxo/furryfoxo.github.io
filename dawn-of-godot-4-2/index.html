@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dawn of Godot 4.2</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dawn of Godot 4.2</title>
+	<style>
+		body {
+			background-color: #000;
+			color: #fff;
+			font-family: 'Arial', sans-serif;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
 
-        #txt {
-            font-size: 2em;
-            margin-top: 100px;
-        }
+		#txt {
+			font-size: 2em;
+			margin-top: 100px;
+		}
 
-        #godot {
-            font-size: 4em;
-            font-weight: 600;
-            margin-top: 20px;
-        }
+		#godot {
+			font-size: 4em;
+			font-weight: 600;
+			margin-top: 15px;
+		}
 
-        #msg {
-            font-size: 1.5em;
-            margin-top: 20px;
-        }
-    </style>
+		#msg {
+			font-size: 1.5em;
+			margin-top: 15px;
+		}
+
+		table {
+			text-align: left;
+			vertical-align: top;
+			color: #b9b9b9;
+			margin: auto;
+			margin-top: 30vh;
+			width: 80%;
+		}
+	</style>
 </head>
 <body>
-    <div id="txt">Dawn of</div>
-    <div id="godot">Godot 4.2</div>
-    <div id="msg">-? Issues Remain-</div>
+	<div id="txt">Dawn of</div>
+	<div id="godot">Godot 4.2</div>
+	<div id="msg">-? Issues Remain-</div>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Issue</th>
+			</tr>
+		</thead>
+		<tbody id="tableBody">
+			<tr>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <script>
-        function get_issue_count() {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', "https://api.github.com/repos/godotengine/godot/milestones/18", false);
-            xhr.send();
+	<script>
+		var tableBody = document.getElementById('tableBody')
 
-            if (xhr.status >= 200 && xhr.status < 300) {
-                let jsonResponse = JSON.parse(xhr.responseText);
-                let issue_count = jsonResponse.open_issues
-                console.log(issue_count);
-                return issue_count
-            } else {
-                console.log('?')
-            }
-        }
+		function update() {
+			let http = new XMLHttpRequest();
+			http.open('GET', 'https://api.github.com/repos/godotengine/godot/issues?milestone=18');
+			http.send();
+			http.onreadystatechange = () => {
+				if (http.readyState == http.DONE && http.status == 200) {
+					let jsonResponse = JSON.parse(http.responseText);
+					let issue_count = jsonResponse.length;
+					console.log(issue_count);
 
-        function update_issue_count() {
-            let issue_count = get_issue_count();
-            document.getElementById("msg").textContent = `-${issue_count} Issues Remain-`;
-            return issue_count
-        }
+					document.getElementById('msg').textContent = `-${issue_count} Issues Remain-`;
 
-        var x = setInterval(function() {
-           let issue_count = update_issue_count();
-            if (issue_count === 0) {
-                clearInterval(x)
-            }
-        }, 20000);
+					while (tableBody.firstChild) {tableBody.firstChild.remove()}
+					jsonResponse.forEach(element => {
+						let row = document.createElement('tr')
+						let issue_num = document.createElement('td')
+						let issue_name = document.createElement('td')
+						let issue_name_link = document.createElement('a')
+						row.appendChild(issue_num)
+						row.appendChild(issue_name)
+						issue_name.appendChild(issue_name_link)
+						console.log()
+						issue_num.textContent = element.number
+						issue_name.textContent = element.title
+						issue_name_link.href = element.html_url
 
-        update_issue_count()
-    </script>
+						tableBody.appendChild(row)
+					});
+				}
+			}
+		}
+
+		var x = setInterval(update, 20000);
+		update()
+	</script>
 </body>
 </html>
