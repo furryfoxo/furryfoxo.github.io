@@ -32,11 +32,19 @@
 
 		table {
 			text-align: left;
-			vertical-align: top;
 			color: #b9b9b9;
 			margin: auto;
 			margin-top: 30vh;
 			width: 80%;
+		}
+
+		tr {
+			vertical-align: top;
+		}
+
+		a {
+			color: #b9b9b9;
+			text-decoration: none;
 		}
 	</style>
 </head>
@@ -82,12 +90,12 @@
 						let issue_name_link = document.createElement('a')
 						row.appendChild(issue_num)
 						row.appendChild(issue_name)
-						issue_name.appendChild(issue_name_link)
-						console.log()
+						
 						issue_num.textContent = element.number
-						issue_name.textContent = element.title
 						issue_name_link.href = element.html_url
-
+						issue_name_link.textContent = element.title
+						
+						issue_name.appendChild(issue_name_link)
 						tableBody.appendChild(row)
 					});
 				}
