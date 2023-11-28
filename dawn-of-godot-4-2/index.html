@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +49,7 @@
 		}
 	</style>
 </head>
+
 <body>
 	<div id="txt">Dawn of</div>
 	<div id="godot">Godot 4.2</div>
@@ -68,7 +70,7 @@
 	</table>
 
 	<script>
-		var tableBody = document.getElementById('tableBody')
+		var tableBody = document.getElementById('tableBody');
 
 		function update() {
 			let http = new XMLHttpRequest();
@@ -80,23 +82,38 @@
 					let issue_count = jsonResponse.length;
 					console.log(issue_count);
 
-					document.getElementById('msg').textContent = `-${issue_count} Issues Remain-`;
+					let msg = document.getElementById('msg');
+					let godot = document.getElementById('godot');
 
-					while (tableBody.firstChild) {tableBody.firstChild.remove()}
+					if (issue_count == 1) {
+						msg.textContent = `-1 Issue Remains-`;
+					}
+					else if (issue_count == 0) {
+						godot.textContent = 'A new Release';
+						msg.textContent = '-No issues Remain-';
+
+						document.body.style.backgroundColor = 'white';
+						document.body.style.color = 'black';
+					}
+					else {
+						msg.textContent = `-${issue_count} Issues Remain-`;
+					}
+
+					while (tableBody.firstChild) { tableBody.firstChild.remove() }
 					jsonResponse.forEach(element => {
-						let row = document.createElement('tr')
-						let issue_num = document.createElement('td')
-						let issue_name = document.createElement('td')
-						let issue_name_link = document.createElement('a')
-						row.appendChild(issue_num)
-						row.appendChild(issue_name)
-						
-						issue_num.textContent = element.number
-						issue_name_link.href = element.html_url
-						issue_name_link.textContent = element.title
-						
-						issue_name.appendChild(issue_name_link)
-						tableBody.appendChild(row)
+						let row = document.createElement('tr');
+						let issue_num = document.createElement('td');
+						let issue_name = document.createElement('td');
+						let issue_name_link = document.createElement('a');
+						row.appendChild(issue_num);
+						row.appendChild(issue_name);
+
+						issue_num.textContent = element.number;
+						issue_name_link.href = element.html_url;
+						issue_name_link.textContent = element.title;
+
+						issue_name.appendChild(issue_name_link);
+						tableBody.appendChild(row);
 					});
 				}
 			}
@@ -106,4 +123,5 @@
 		update()
 	</script>
 </body>
+
 </html>
