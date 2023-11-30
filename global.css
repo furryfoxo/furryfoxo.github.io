@@ -1,11 +1,8 @@
 html {
   font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
   background-color: #191919;
   color: white;
-}
-
-a, p, input, label {
-	font-size: 1rem;
 }
 
 button {
