@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Godot 4.3</title>
+	<style>
+		body {
+			background-color: #000;
+			color: #fff;
+			font-family: 'Arial', sans-serif;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		#txt {
+			font-size: 2em;
+			margin-top: 100px;
+		}
+
+		#godot {
+			font-size: 4em;
+			font-weight: 600;
+			margin-top: 15px;
+		}
+
+		#msg {
+			font-size: 1.5em;
+			margin-top: 15px;
+		}
+
+		table {
+			text-align: left;
+			color: #b9b9b9;
+			margin: auto;
+			margin-top: 30vh;
+			width: 80%;
+		}
+
+		tr {
+			vertical-align: top;
+		}
+
+		a {
+			color: #b9b9b9;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="txt">Dawn of</div>
+	<div id="godot">Godot 4.3</div>
+	<div id="msg">-? Issues Remain-</div>
+
+	<script>
+		var tableBody = document.getElementById('tableBody');
+
+		function update() {
+			let http = new XMLHttpRequest();
+			// 
+			http.open('GET', 'https://api.github.com/repos/godotengine/godot/milestones/19');
+			http.send();
+			http.onreadystatechange = () => {
+				if (http.readyState == http.DONE && http.status == 200) {
+					let jsonResponse = JSON.parse(http.responseText);
+					let issue_count = jsonResponse.open_issues;
+
+					let msg = document.getElementById('msg');
+					let godot = document.getElementById('godot');
+
+					if (issue_count == 1) {
+						msg.textContent = `-1 Issue Remains-`;
+					}
+					else if (issue_count == 0) {
+						godot.textContent = 'A new Release';
+						msg.textContent = '-No issues Remain-';
+
+						document.body.style.backgroundColor = 'white';
+						document.body.style.color = 'black';
+					}
+					else {
+						msg.textContent = `-${issue_count} Issues Remain-`;
+					}
+				}
+			}
+		}
+
+		var x = setInterval(update, 20000);
+		update()
+	</script>
+</body>
+
+</html>
