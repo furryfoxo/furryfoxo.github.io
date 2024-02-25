@@ -19,6 +19,7 @@ ul {
 	list-style-type: none;
 }
 
+
 /* Tables */
 
 .activityTable {
@@ -57,10 +58,14 @@ ul {
 }
 
 
-/* Anchors */
+/* Links */
+
+a:link {
+	color: #5498ff;
+}
 
 a:visited {
-	color: #5498ff;
+	color: #6267ff;
 }
 
 
